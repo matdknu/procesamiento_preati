@@ -8,7 +8,8 @@ pacman::p_load(dplyr,
                tidyverse, 
                sjlabelled, 
                ggplot2,
-               readxl)
+               readxl, 
+               openxlsx)
 
 # Cargar BBDD----
 
@@ -20,14 +21,14 @@ bbdd <- read_excel("bbdd/bbdd_emprendedor.xlsx")
 ## Limpieza de datos ----
 ### Reemplazo de NA----
 
-bbdd <- bbdd %>% mutate_all(funs(ifelse(is.na(.), "No responde", .)))
+encuesta_turista <- bbdd %>% mutate_all(funs(ifelse(is.na(.), "No responde", .)))
 
 ### Cambio de nombre de variables ----
 
 # Renombrar todas las variables
-names(bbdd) <- c("genero", "edad", "pueblo_indigena", "educacion", "conexion_internet",
+names(encuesta_turista) <- c("genero", "edad", "pueblo_indigena", "educacion", "conexion_internet",
                  "comuna_emprendimiento", "comuna_emprendimiento_otra", "zona_emprendimiento",
-                 "sociedad_emprendimiento", "sociedad_emprendimiento_otra", "año_inicio",
+                 "sociedad_emprendimiento", "sociedad_emprendimiento_otra", "ano_inicio",
                  "turismo_principal", "temporada_abierto", "tramite_formalizacion",
                  "inicio_actividades", "tipos_sociedad", "tipos_sociedad_otras",
                  "categoria_sernatur", "justificacion_no_inicio", "sello_indigena",
@@ -52,6 +53,15 @@ names(bbdd) <- c("genero", "edad", "pueblo_indigena", "educacion", "conexion_int
                  "crisis_zona_segura", "crisis_protocolo_sanitario", "crisis_primeros_auxilios")
 
 # Verificar los nuevos nombres de las variables
-names(bbdd)
+names(encuesta_turista)
+
+# guardar base nueva ----
+
+# Modificación variable
+
+encuesta_turista <- encuesta_turista %>% mutate(edad = as.numeric(if_else(edad == "NA", NA_character_, edad)))
 
 
+# Guardar BBDD-----
+
+saveRDS(encuesta_turista, "bbdd/encuesta_turista.rds")
