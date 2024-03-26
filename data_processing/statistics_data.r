@@ -209,13 +209,9 @@ objetos <- ls()
 # Mostrar la lista de objetos
 print(objetos)
 
-
-
-
 # Agregar cada objeto a una hoja diferente -----
 
 wb <- createWorkbook()
-
 
 addWorksheet(wb, "EncuestaTurista")
 writeData(wb, sheet = "EncuestaTurista", genero)
@@ -229,7 +225,10 @@ writeData(wb, sheet = "PorcentajePuebloIndigena", porcentaje_pueblo_indigena)
 
 saveWorkbook(wb, file.path("bbdd", "resultados_encuesta2.xlsx"))
 
+
+
 ## Obtener una lista de todos los objetos en el entorno de trabajo
+
 objetos <- ls()
 
 # Crear un libro de Excel para todos los objetos
@@ -243,3 +242,8 @@ for (objeto in objetos) {
 
 # Guardar el libro de Excel
 saveWorkbook(wb, file.path("bbdd", "resultados_encuesta2.xlsx"))
+
+
+
+
+
