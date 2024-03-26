@@ -54,7 +54,7 @@ comuna <- encuesta_turista %>%
   mutate(porcentaje = (total / sum(total)) * 100)
 
 comuna_otra_pegada <- encuesta_turista %>%
-  mutate(comuna_emprendimiento = ifelse(comuna_emprendimiento == "Otra", comuna_emprendimiento_otra, comuna_emprendimiento)) %>% 
+  #mutate(comuna_emprendimiento = ifelse(comuna_emprendimiento == "Otra", comuna_emprendimiento_otra, comuna_emprendimiento)) %>% 
   group_by(comuna_emprendimiento) %>%
   summarize(total = n()) %>%
   mutate(porcentaje = (total / sum(total)) * 100)
@@ -198,9 +198,164 @@ comida <- encuesta_turista %>%
   summarize(total = n()) %>%
   mutate(porcentaje = (total / sum(total)) * 100)
 
+admision_mascotas <- encuesta_turista %>%
+  group_by(admision_mascotas) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100); admision_mascotas
+
+n_turistas_alta <- encuesta_turista %>%
+  group_by(n_turistas_alta) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100); n_turistas_alta
 
 
 
+n_turistas_suma <- encuesta_turista %>%
+  mutate(n_turistas_alta = as.numeric(n_turistas_alta)) %>%
+  group_by(comuna_emprendimiento) %>%
+  summarize(total = sum(n_turistas_alta, na.rm = TRUE))
+
+n_turistas_suma_pueblo <- encuesta_turista %>%
+  mutate(n_turistas_alta = as.numeric(n_turistas_alta)) %>%
+  group_by(pueblo_indigena) %>%
+  summarize(total = sum(n_turistas_alta, na.rm = TRUE))
+
+
+gasto_turista <- encuesta_turista %>%
+  group_by(gasto_turista) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100); gasto_turista
+
+gasto_turista_comuna <- encuesta_turista %>%
+  filter(comuna_emprendimiento %in% c("Rapa Nui", "Nueva Imperial")) %>% 
+  group_by(gasto_turista, comuna_emprendimiento) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100); gasto_turista
+
+
+actividad_complementaria <- encuesta_turista %>%
+ separate_rows(actividad_complementaria, sep = ", ") %>%
+  group_by(actividad_complementaria) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100)
+
+
+n_personas_emprendimiento_alta <- encuesta_turista %>%
+  #separate_rows(actividad_complementaria, sep = ", ") %>%
+  group_by(n_personas_emprendimiento_alta) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100)
+
+
+n_personas_emprendimiento_baja <- encuesta_turista %>%
+  #separate_rows(actividad_complementaria, sep = ", ") %>%
+  group_by(n_personas_emprendimiento_baja) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100)
+
+
+financiamiento <- encuesta_turista %>%
+  separate_rows(financiamiento, sep = ", ") %>%
+  group_by(financiamiento) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100)
+
+
+financiamiento_institucion <- encuesta_turista %>%
+  separate_rows(financiamiento_institucion , sep = ", ") %>%
+  group_by(financiamiento_institucion ) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100)
+
+compra_comunidad <- encuesta_turista %>%
+  group_by(compra_comunidad) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100)
+
+relaciones_externas <- encuesta_turista %>%
+  group_by(relaciones_externas) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100)
+
+
+vinculacion_otros_actores <- encuesta_turista %>%
+  group_by(vinculacion_otros_actores) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100)
+
+artesania_local <- encuesta_turista %>%
+  group_by(artesania_local) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100)
+
+resguardo_patrimonial <- encuesta_turista %>%
+  group_by(resguardo_patrimonial) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100)
+
+
+
+informacion_ancestral <- encuesta_turista %>%
+  group_by(informacion_ancestral) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100)
+
+informacion_ancestral_pueblo <- encuesta_turista %>%
+  group_by(informacion_ancestral, pueblo_indigena) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100); informacion_ancestral_pueblo
+
+
+normas_comportamiento_personas  <- encuesta_turista %>%
+  group_by(normas_comportamiento_personas) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100); normas_comportamiento_personas
+
+normas_comportamiento_servicios <- encuesta_turista %>%
+  group_by(normas_comportamiento_servicios ) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100); normas_comportamiento_personas
+
+
+gestion_basura  <- encuesta_turista %>%
+  separate_rows(gestion_basura , sep = ", ") %>%
+  group_by(gestion_basura) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100); gestion_basura 
+
+
+eficiencia_energetica  <- encuesta_turista %>%
+  separate_rows(eficiencia_energetica , sep = ", ") %>%
+  group_by(eficiencia_energetica ) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100); eficiencia_energetica 
+
+disponibilidad_agua  <- encuesta_turista %>%
+  #separate_rows(disponibilidad_agua , sep = ", ") %>%
+  group_by(disponibilidad_agua ) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100); disponibilidad_agua
+
+
+recuperacion_ambiental  <- encuesta_turista %>%
+  group_by(recuperacion_ambiental) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100); recuperacion_ambiental
+
+
+capacidad_de_carga  <- encuesta_turista %>%
+  group_by(capacidad_de_carga) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100); capacidad_de_carga 
+
+
+turismo_afectado  <- encuesta_turista %>%
+  group_by(turismo_afectado ) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100); turismo_afectado 
+
+
+## Crisis-----
 
 
 # Obtener una lista de todos los objetos en el entorno de trabajo
@@ -234,6 +389,8 @@ objetos <- ls()
 # Crear un libro de Excel para todos los objetos
 wb <- createWorkbook()
 
+wb
+
 # Agregar cada objeto a una hoja diferente en el libro de Excel
 for (objeto in objetos) {
   addWorksheet(wb, objeto)
@@ -245,5 +402,24 @@ saveWorkbook(wb, file.path("bbdd", "resultados_encuesta2.xlsx"))
 
 
 
+# Crear un libro de Excel
+wb <- createWorkbook()
+
+# Lista de objetos que deseas escribir en el libro de Excel
+objetos <- ls()
+
+# Iterar sobre cada objeto y agregarlo a una hoja en el libro de Excel
+for (objeto in objetos) {
+  # Comprueba si el objeto es un data frame
+  if (is.data.frame(get(objeto))) {
+    addWorksheet(wb, objeto)  # Agregar una nueva hoja con el nombre del objeto
+    writeData(wb, sheet = objeto, x = get(objeto))  # Escribir los datos en la hoja
+  } else {
+    warning(paste("El objeto", objeto, "no es un data frame. No se pudo escribir en una hoja."))
+  }
+}
+
+# Guardar el libro de Excel en un archivo
+saveWorkbook(wb, file.path("bbdd", "resultados_encuesta2.xlsx"))
 
 

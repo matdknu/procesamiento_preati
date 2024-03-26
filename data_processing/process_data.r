@@ -59,7 +59,8 @@ names(encuesta_turista)
 
 # Modificación variable
 
-encuesta_turista <- encuesta_turista %>% mutate(edad = as.numeric(if_else(edad == "NA", NA_character_, edad)))
+encuesta_turista <- encuesta_turista %>% mutate(edad = as.numeric(if_else(edad == "NA", NA_character_, edad))) %>% 
+  mutate(comuna_emprendimiento = ifelse(comuna_emprendimiento == "Otra", comuna_emprendimiento_otra, comuna_emprendimiento)) 
 
 
 # Guardar BBDD-----
