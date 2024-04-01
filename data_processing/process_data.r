@@ -18,10 +18,14 @@ options(scipen=999) # valores sin notación científica
 
 bbdd <- read_excel("bbdd/bbdd_emprendedor.xlsx")
 
+ls <- variable.names(bbdd)
+
+
 ## Limpieza de datos ----
 ### Reemplazo de NA----
 
-encuesta_turista <- bbdd %>% mutate_all(funs(ifelse(is.na(.), "No responde", .)))
+encuesta_turista <- bbdd %>% mutate_all(funs(ifelse(is.na(.), "No responde", .))) 
+encuesta_turista$ID <- seq_along(bbdd[,1])
 
 ### Cambio de nombre de variables ----
 
@@ -50,7 +54,7 @@ names(encuesta_turista) <- c("genero", "edad", "pueblo_indigena", "educacion", "
                  "crisis_desarrollo", "crisis_tipo_evento", "crisis_tipo_evento_otro", "crisis_desercion_laboral",
                  "crisis_recuperacion", "crisis_medios_comunicacion", "crisis_medios_comunicacion_otros",
                  "crisis_actores", "crisis_actores_cual", "crisis_protocolo_emergencia", "crisis_zona_riesgo",
-                 "crisis_zona_segura", "crisis_protocolo_sanitario", "crisis_primeros_auxilios")
+                 "crisis_zona_segura", "crisis_protocolo_sanitario", "crisis_primeros_auxilios", "ID")
 
 # Verificar los nuevos nombres de las variables
 names(encuesta_turista)
@@ -61,6 +65,7 @@ names(encuesta_turista)
 
 encuesta_turista <- encuesta_turista %>% mutate(edad = as.numeric(if_else(edad == "NA", NA_character_, edad))) %>% 
   mutate(comuna_emprendimiento = ifelse(comuna_emprendimiento == "Otra", comuna_emprendimiento_otra, comuna_emprendimiento)) 
+
 
 
 # Guardar BBDD-----

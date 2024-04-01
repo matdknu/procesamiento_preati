@@ -62,7 +62,7 @@ comuna_otra_pegada <- encuesta_turista %>%
 zona_emprendimiento <- encuesta_turista %>%
   group_by(zona_emprendimiento) %>%
   summarize(total = n()) %>%
-  mutate(porcentaje = (total / sum(total)) * 100)
+  mutate(porcentaje = (total / sum(total)) * 100); zona_emprendimiento
 
 sociedad_emprendimiento <- encuesta_turista %>%
   group_by(sociedad_emprendimiento) %>%
@@ -79,7 +79,7 @@ ano_inicio <- encuesta_turista %>%
 turismo_principal <- encuesta_turista %>%
   group_by(turismo_principal) %>%
   summarize(total = n()) %>%
-  mutate(porcentaje = (total / sum(total)) * 100)
+  mutate(porcentaje = (total / sum(total)) * 100); turismo_principal
 
 
 turismo_principal_pueblo <- encuesta_turista %>%
@@ -109,7 +109,7 @@ tramite_formalizacion <- encuesta_turista %>%
   separate_rows(tramite_formalizacion, sep = ", ") %>%
   group_by(tramite_formalizacion) %>%
   summarize(total = n()) %>%
-  mutate(porcentaje = (total / sum(total)) * 100)
+  mutate(porcentaje = (total / sum(total)) * 100); tramite_formalizacion
 
 
 
@@ -123,7 +123,7 @@ tramite_formalizacion_pueblos <- encuesta_turista %>%
 inicio_actividades <- encuesta_turista %>%
   group_by(inicio_actividades) %>%
   summarize(total = n()) %>%
-  mutate(porcentaje = (total / sum(total)) * 100)
+  mutate(porcentaje = (total / sum(total)) * 100); inicio_actividades
 
 
 encuesta_turista$justificacion_no_inicio
@@ -153,16 +153,16 @@ espacio_desarrollo <- encuesta_turista %>%
 
 instalaciones_turisticas <- encuesta_turista %>%
   separate_rows(instalaciones_turisticas, sep = ", ") %>%
-  group_by(instalaciones_turisticas ) %>%
+  group_by(instalaciones_turisticas, ID ) %>%
   summarize(total = n()) %>%
-  mutate(porcentaje = (total / sum(total)) * 100)
+  mutate(porcentaje = (total / sum(total)) * 100); instalaciones_turisticas
 
 
 herramienta_difusion <- encuesta_turista %>%
   separate_rows(herramienta_difusion, sep = ", ") %>%
-  group_by(herramienta_difusion) %>%
+  group_by(herramienta_difusion, ID) %>%
   summarize(total = n()) %>%
-  mutate(porcentaje = (total / sum(total)) * 100)
+  mutate(porcentaje = (total / sum(total)) * 100); herramienta_difusion
 
 
 idioma <- encuesta_turista %>%
@@ -170,6 +170,13 @@ idioma <- encuesta_turista %>%
   group_by(idioma) %>%
   summarize(total = n()) %>%
   mutate(porcentaje = (total / sum(total)) * 100)
+
+organizacion_indigena <- encuesta_turista %>%
+  #separate_rows(idioma, sep = ", ") %>%
+  group_by(organizaciones_indigenas) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100); organizacion_indigena
+
 
 organizacion_no_indigena <- encuesta_turista %>%
   #separate_rows(idioma, sep = ", ") %>%
@@ -191,6 +198,15 @@ discapacidad <- encuesta_turista %>%
   group_by(discapacidad) %>%
   summarize(total = n()) %>%
   mutate(porcentaje = (total / sum(total)) * 100)
+
+
+servicios_recreativos <- encuesta_turista %>%
+  separate_rows(servicios_recreativos, sep = ", ") %>%
+  group_by(servicios_recreativos) %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100); servicios_recreativos
+
+
 
 
 comida <- encuesta_turista %>%
@@ -295,6 +311,8 @@ resguardo_patrimonial <- encuesta_turista %>%
 
 
 
+
+
 informacion_ancestral <- encuesta_turista %>%
   group_by(informacion_ancestral) %>%
   summarize(total = n()) %>%
@@ -359,9 +377,6 @@ turismo_afectado  <- encuesta_turista %>%
   group_by(turismo_afectado ) %>%
   summarize(total = n()) %>%
   mutate(porcentaje = (total / sum(total)) * 100); turismo_afectado
-
-
-
 
 ## Crisis-----
 
