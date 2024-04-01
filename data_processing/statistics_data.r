@@ -225,6 +225,13 @@ n_turistas_alta <- encuesta_turista %>%
   mutate(porcentaje = (total / sum(total)) * 100); n_turistas_alta
 
 
+encuesta_turista %>% 
+  group_by(invita_actividad) %>% 
+  select(invita_actividad) %>% 
+  separate_rows(invita_actividad, sep = ",") %>%
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100)
+
 
 n_turistas_suma <- encuesta_turista %>%
   mutate(n_turistas_alta = as.numeric(n_turistas_alta)) %>%
