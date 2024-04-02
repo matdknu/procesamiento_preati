@@ -373,6 +373,18 @@ capacidad_de_carga  <- encuesta_turista %>%
   summarize(total = n()) %>%
   mutate(porcentaje = (total / sum(total)) * 100); capacidad_de_carga 
 
+capacitaciones_recibidas <- encuesta_turista %>% select(capacitaciones_recibidas) %>% 
+  separate_rows(capacitaciones_recibidas , sep = ", ") %>% 
+  group_by(capacitaciones_recibidas) %>% 
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100)
+
+capacitaciones_necesitadas <- encuesta_turista %>% select(capacitaciones_necesitadas) %>% 
+  separate_rows(capacitaciones_necesitadas , sep = ", ") %>% 
+  group_by(capacitaciones_necesitadas) %>% 
+  summarize(total = n()) %>%
+  mutate(porcentaje = (total / sum(total)) * 100); capacitaciones_necesitadas
+
 
 turismo_afectado  <- encuesta_turista %>%
   group_by(turismo_afectado ) %>%
