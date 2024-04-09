@@ -1,0 +1,26 @@
+{
+    "id": "5E9A0860",
+    "path": "D:/Dropbox/CIIR/01 FONDEF 2021 Ejecución/procesamiento_preati/data_processing/process_data.r",
+    "project_path": "data_processing/process_data.r",
+    "type": "r_source",
+    "hash": "1248392194",
+    "contents": "",
+    "dirty": false,
+    "created": 1712234856031.0,
+    "source_on_save": false,
+    "relative_order": 5,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "59,33",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1712236373,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1712236373914,
+    "read_only": false,
+    "read_only_alternatives": []
+}
