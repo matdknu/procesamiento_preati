@@ -17,6 +17,8 @@ rm(list=ls())       # borrar todos los objetos en el espacio de trabajo
 options(scipen=999) # valores sin notación científica
 
 bbdd <- read_excel("bbdd/bbdd_emprendedor.xlsx")
+bbdd <- read_excel("bbdd/bbdd_emprendedor_v2.xlsx")
+
 
 ls <- variable.names(bbdd)
 
@@ -102,12 +104,12 @@ names(encuesta_emprendedor)
 
 # Modificación variable
 
-encuesta_emprendedor <- encuesta_emprendedor %>% mutate(edad = as.numeric(if_else(edad == "NA", NA_character_, edad))) %>% 
-  mutate(comuna_emprendimiento = ifelse(comuna_emprendimiento == "Otra", comuna_emprendimiento_otra, comuna_emprendimiento)) 
+encuesta_emprendedor <- encuesta_emprendedor %>% mutate(a2_edad = as.numeric(if_else(a2_edad == "NA", NA_character_, a2_edad))) %>% 
+  mutate(a6_comuna_emprendimiento = ifelse(a6_comuna_emprendimiento== "Otra", a6_comuna_emprendimiento, a6_comuna_emprendimiento)) 
 
 
 
 # Guardar BBDD-----
 
-saveRDS(encuesta_emprendedor, "bbdd/encuesta_emprendedor.rds")
-write.csv(encuesta_emprendedor, "bbdd/encuesta_emprendedor.csv2")
+saveRDS(encuesta_emprendedor, "bbdd/encuesta_emprendedor_v2.rds")
+write.csv(encuesta_emprendedor, "bbdd/encuesta_emprendedor_v2.csv2")
